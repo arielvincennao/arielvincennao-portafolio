@@ -8,7 +8,7 @@ export const testimonials: Testimonial[] = [
     avatar: '/avatars/avatar.jpg',
     content: 'Trabajar con Ariel ha sido una experiencia excepcional. Su capacidad para resolver problemas complejos y su atención al detalle son impresionantes. Siempre entrega trabajos de alta calidad y es un gran compañero de equipo.',
     date: '15 de Diciembre, 2023',
-    linkedin: 'https://linkedin.com/in/maria-gonzalez'
+    linkedin: 'https://linkedin.com'
   },
   {
     id: 'testimonial-2',
@@ -17,7 +17,7 @@ export const testimonials: Testimonial[] = [
     avatar: '/avatars/avatar.jpg',
     content: 'Ariel demostró un nivel de profesionalismo y habilidades técnicas sobresalientes en nuestro último proyecto. Su capacidad para aprender rápidamente nuevas tecnologías y su ética de trabajo lo convierten en un activo valioso para cualquier equipo.',
     date: '5 de Enero, 2024',
-    linkedin: 'https://linkedin.com/in/carlos-mendoza'
+    linkedin: 'https://linkedin.com'
   },
   {
     id: 'testimonial-3',
@@ -26,7 +26,7 @@ export const testimonials: Testimonial[] = [
     avatar: '/avatars/avatar.jpg',
     content: 'Ariel demostró un nivel de profesionalismo y habilidades técnicas sobresalientes en nuestro último proyecto. Su capacidad para aprender rápidamente nuevas tecnologías y su ética de trabajo lo convierten en un activo valioso para cualquier equipo.',
     date: '5 de Enero, 2024',
-    linkedin: 'https://linkedin.com/in/ana-rodriguez'
+    linkedin: 'https://linkedin.com'
   },
   {
     id: 'testimonial-4',
@@ -35,6 +35,6 @@ export const testimonials: Testimonial[] = [
     avatar: '/avatars/avatar.jpg',
     content: 'Ariel demostró un nivel de profesionalismo y habilidades técnicas sobresalientes en nuestro último proyecto. Su capacidad para aprender rápidamente nuevas tecnologías y su ética de trabajo lo convierten en un activo valioso para cualquier equipo.',
     date: '5 de Enero, 2024',
-    linkedin: 'https://linkedin.com/in/roberto-silva'
+    linkedin: 'https://linkedin.com'
   }
 ];
