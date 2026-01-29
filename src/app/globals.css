@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Tinos:wght@400;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -19,8 +20,107 @@
   }
 }
 
+body, p {
+  font-family: 'Tinos', serif;
+  color: #e0e0e0;
+}
+h1, h2 {
+  font-family: 'Cinzel', serif;
+  color: #e0e0e0;
+}
+h3, blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  color: #e0e0e0;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+  50% {
+    transform: translateY(20px);
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2.8s infinite;
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slower {
+  animation: spin-slow 80s linear infinite;
+}
+
+@keyframes star-blink {
+  0%, 100% { opacity: 0.25; }
+  10% { opacity: 0.45; }
+  50% { opacity: 1; }
+  90% { opacity: 0.45; }
+}
+
+/* Efecto corte diagonal en navbar */
+.navbar-link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.navbar-link .navbar-link-inner {
+  display: inline-block;
+  position: relative;
+}
+.navbar-link .navbar-link-inner::before,
+.navbar-link .navbar-link-inner::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transition: transform 0.35s cubic-bezier(0.77,0,0.175,1);
+  pointer-events: none;
+}
+.navbar-link .navbar-link-inner::before {
+  top: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  color: inherit;
+}
+.navbar-link .navbar-link-inner::after {
+  top: 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  color: inherit;
+}
+.navbar-link:hover .navbar-link-inner::before {
+  transform: translateY(-10%);
+}
+.navbar-link:hover .navbar-link-inner::after {
+  transform: translateY(10%);
+}
+.navbar-link .navbar-link-inner {
+  position: relative;
+  z-index: 1;
+}
+.navbar-link .navbar-link-inner span {
+  visibility: hidden;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
 }
