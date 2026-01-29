@@ -5,4 +5,5 @@ export interface Testimonial {
   avatar: string;
   content: string;
   date: string;
+  linkedin?: string;
 }

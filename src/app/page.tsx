@@ -14,9 +14,12 @@ export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
-  
+
   // Arrow visibility state
   const [showArrow, setShowArrow] = useState(true);
+
+  // Mobile menu state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
@@ -49,7 +52,7 @@ export default function Home() {
       const scrollHeight = document.documentElement.scrollHeight;
       const scrollTop = document.documentElement.scrollTop;
       const clientHeight = document.documentElement.clientHeight;
-      
+
       // Hide arrow when user is near the bottom (within 100px)
       const isAtBottom = scrollHeight - scrollTop - clientHeight < 100;
       setShowArrow(!isAtBottom);
@@ -57,40 +60,122 @@ export default function Home() {
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Check initial position
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <div className="flex flex-col min-h-screen justify-center items-center bg-black relative overflow-hidden">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 border-b border-white/30 backdrop-blur-md py-5 px-8 flex items-center justify-between">
-        <div className="flex gap-2 items-center" style={{ width: '120px' }}></div>
-        <ul className="flex gap-4 text-white text-lg font-[Cinzel] items-center">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 border-b border-white/30 backdrop-blur-md py-5 px-4 md:px-8 flex items-center justify-between">
+        {/* Hamburger menu button for mobile */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
+          aria-label="Toggle menu"
+        >
+          <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+        </button>
+
+        {/* Desktop navigation */}
+        <div className="hidden md:flex gap-2 items-center" style={{ width: '120px' }}></div>
+
+        <ul className="hidden md:flex gap-4 text-white text-lg font-[Cinzel] items-center">
           <li className="flex items-center"><a href="#inicio" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Inicio"><span>Inicio</span></span></a></li>
           <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
           <li className="flex items-center"><a href="#sobremi" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Sobre mí"><span>Sobre mí</span></span></a></li>
           <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
+          <li className="flex items-center"><a href="#tecnologias" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Tecnologías"><span>Tecnologías</span></span></a></li>
+          <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
           <li className="flex items-center"><a href="#proyectos" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Proyectos"><span>Proyectos</span></span></a></li>
           <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
-          <li className="flex items-center"><a href="#contacto" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Opiniones"><span>Opiniones</span></span></a></li>
+          <li className="flex items-center"><a href="#opiniones" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Opiniones"><span>Opiniones</span></span></a></li>
         </ul>
-        <div className="flex gap-2 items-center">
-          <button className="text-white text-lg font-[Cinzel] px-3 py-1 border border-white/30 rounded hover:bg-white/10 transition-colors min-w-[44px] text-center">EN</button>
-          <button className="text-white text-lg font-[Cinzel] px-3 py-1 border border-white/30 rounded hover:bg-white/10 transition-colors min-w-[44px] text-center">ES</button>
+
+        <div className="hidden md:flex gap-2 items-center">
+          <button className="cursor-not-allowed text-white text-lg font-[Cinzel] px-3 py-1 border border-white/30 rounded hover:bg-white/10 transition-colors min-w-[44px] text-center">EN</button>
+          <button className="cursor-pointer text-white text-lg font-[Cinzel] px-3 py-1 border border-white/30 rounded hover:bg-white/10 transition-colors min-w-[44px] text-center">ES</button>
         </div>
       </nav>
+
+      {/* Mobile menu overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+
+          {/* Mobile menu panel */}
+          <div className="absolute top-0 right-0 h-full w-64 bg-black/95 border-l border-white/30 backdrop-blur-md p-6 flex flex-col">
+            {/* Close button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center text-white hover:text-white/80 transition-colors"
+              aria-label="Close menu"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Mobile navigation links */}
+            <nav className="flex flex-col gap-6 mt-16">
+              <a
+                href="#inicio"
+                className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Inicio
+              </a>
+              <a
+                href="#sobremi"
+                className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Sobre mí
+              </a>
+              <a
+                href="#tecnologias"
+                className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Tecnologias
+              </a>
+              <a
+                href="#proyectos"
+                className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Proyectos
+              </a>
+              <a
+                href="#opiniones"
+                className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Opiniones
+              </a>
+            </nav>
+
+            {/* Language buttons */}
+            <div className="flex gap-2 mt-auto">
+              <button className="text-white text-lg font-[Cinzel] px-3 py-1 border border-white/30 rounded hover:bg-white/10 transition-colors min-w-[44px] text-center">EN</button>
+              <button className="text-white text-lg font-[Cinzel] px-3 py-1 border border-white/30 rounded hover:bg-white/10 transition-colors min-w-[44px] text-center">ES</button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Hero Section */}
       <section className="relative flex-1 flex items-center justify-center w-full min-h-screen py-24">
-        {/* Overlay de degradado negro en los bordes */}
         <div className="pointer-events-none select-none absolute inset-0 z-30" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.95) 100%)' }} />
-        {/* Overlay de estrellas animadas */}
         <StarsOverlay />
-        {/* Imagen en el lado derecho */}
         <div className="hidden md:block absolute right-[-180px] bottom-0 z-5 h-full max-h-[1200px] w-auto pointer-events-none select-none">
           <Image src="/greek-meader.svg" alt="Decoración griega" height={1200} width={1200} style={{ objectFit: 'contain', filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} className="h-full max-h-[1200px] w-auto opacity-8 animate-spin-slower" />
         </div>
-        {/* Contenedor centrado para el texto */}
         <div className="z-10 flex flex-col items-center justify-center text-center w-full max-w-2xl mx-auto">
           <h1 className="text-6xl sm:text-7xl font-bold text-foreground mb-4">
             Ariel Vincennao
@@ -98,7 +183,6 @@ export default function Home() {
           <h3 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
             Desarrollador de Software
           </h3>
-          {/* Recuadro para redes sociales y contacto */}
           <div className="mt-8 bg-black border border-white rounded-xl px-8 py-6 flex flex-col items-center w-full max-w-md shadow-lg">
             <div className="flex gap-10 justify-center items-center">
               {/* LinkedIn */}
@@ -132,16 +216,10 @@ export default function Home() {
             &ldquo;No me daré por vencido, ni aún vencido&rdquo;
           </blockquote>
         </div>
-        {/* Imagen en la esquina inferior derecha */}
         <div className="hidden md:block absolute right-0 bottom-0 z-0 h-full max-h-[1200px] w-auto pointer-events-none select-none">
           <Image src="/viking3.png" alt="Imagen de ejemplo" height={1200} width={1200} style={{ objectFit: 'contain' }} className="h-full max-h-[1200px] w-auto" />
         </div>
-        {/* Imagen para móvil, centrada debajo del texto */}
-        <div className="block md:hidden w-full h-[520px] mt-8">
-          <Image src="/viking3.png" alt="Imagen de ejemplo" width={520} height={520} className="mx-auto w-auto h-full" />
-        </div>
       </section>
-      {/* Sección narrativa tipo rollo fotográfico */}
       <section
         id="sobremi"
         ref={aboutMeScrollRef}
@@ -174,8 +252,8 @@ export default function Home() {
                   &ldquo;La chispa natural.&rdquo;
                 </blockquote>
                 <div className="text-white/60 text-xl font-[Tinos] italic animate-pulse mt-5">
-                Desliza para continuar leyendo →
-              </div>
+                  Desliza para continuar leyendo →
+                </div>
               </div>
             </div>
 
@@ -196,7 +274,6 @@ export default function Home() {
                 &ldquo;Nadie elige sus batallas, pero sí cómo pelearlas.&rdquo;
               </blockquote>
             </div>
-            {/* Línea separadora al final de la sección */}
             <div className="w-full max-w-4xl h-px bg-white/20 mt-12"></div>
           </div>
           {/* 3. El Resurgir */}
@@ -337,7 +414,7 @@ export default function Home() {
       {/* Sección Testimonios */}
       <section id="testimonios" className="relative flex flex-col items-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         <h2 className="text-3xl sm:text-4xl font-bold mb-16 font-[Cinzel] text-center">– Palabras de quienes han luchado a mi lado –</h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl w-full px-4">
           {testimonials.map((testimonial) => (
             <TestimonialCard key={testimonial.id} testimonial={testimonial} />
@@ -348,43 +425,42 @@ export default function Home() {
       <section id="llamado" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         <h2 className="text-3xl sm:text-4xl font-bold mb-8 font-[Cinzel]">– Llamado a nuevas campañas –</h2>
         <div className="max-w-2xl text-center text-lg font-[Tinos]">
-          {/* Aquí puedes invitar a nuevos clientes, colaboradores o reclutadores */}
           <p>
             Si quieres unirte a mi próxima aventura, colaborar o tienes una propuesta desafiante, ¡no dudes en contactarme!
           </p>
-         
+
         </div>
-         <div className="mt-8 bg-black border border-white rounded-xl px-8 py-6 flex flex-col items-center w-full max-w-md shadow-lg">
-            <div className="flex gap-10 justify-center items-center">
-              {/* LinkedIn */}
-              <a href="https://www.linkedin.com/in/ariel-vincennao/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Image src="/linkedin.svg" alt="LinkedIn" width={32} height={32} className="hover:scale-110 transition-transform" />
-              </a>
-              {/* GitHub */}
-              <a href="https://github.com/arielvincennao" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Image src="/github.svg" alt="GitHub" width={32} height={32} className="hover:scale-110 transition-transform" />
-              </a>
-              {/* Instagram */}
-              <a href="https://instagram.com/arielvincennao7" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <Image src="/instagram.svg" alt="Instagram" width={32} height={32} className="hover:scale-110 transition-transform" />
-              </a>
-              {/* WhatsApp
+        <div className="mt-8 bg-black border border-white rounded-xl px-8 py-6 flex flex-col items-center w-full max-w-md shadow-lg">
+          <div className="flex gap-10 justify-center items-center">
+            {/* LinkedIn */}
+            <a href="https://www.linkedin.com/in/ariel-vincennao/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Image src="/linkedin.svg" alt="LinkedIn" width={32} height={32} className="hover:scale-110 transition-transform" />
+            </a>
+            {/* GitHub */}
+            <a href="https://github.com/arielvincennao" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Image src="/github.svg" alt="GitHub" width={32} height={32} className="hover:scale-110 transition-transform" />
+            </a>
+            {/* Instagram */}
+            <a href="https://instagram.com/arielvincennao7" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Image src="/instagram.svg" alt="Instagram" width={32} height={32} className="hover:scale-110 transition-transform" />
+            </a>
+            {/* WhatsApp
               <a href="https://wa.me/5491123456789" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <Image src="/whatsapp.svg" alt="WhatsApp" width={32} height={32} className="hover:scale-110 transition-transform" />
               </a>
               */}
-              {/* Telegram }
+            {/* Telegram }
               {/*<a href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                 <Image src="/telegram.svg" alt="Telegram" width={32} height={32} className="hover:scale-110 transition-transform" />
               </a> */}
-              {/* Gmail */}
-              <a href="mailto:vincennaoa@gmail.com" aria-label="Gmail">
-                <Image src="/gmail.svg" alt="Gmail" width={32} height={32} className="hover:scale-110 transition-transform" />
-              </a>
-            </div>
+            {/* Gmail */}
+            <a href="mailto:vincennaoa@gmail.com" aria-label="Gmail">
+              <Image src="/gmail.svg" alt="Gmail" width={32} height={32} className="hover:scale-110 transition-transform" />
+            </a>
           </div>
+        </div>
       </section>
-      {/* Flecha animada para hacer scroll */}
+      {/* Flecha animada */}
       {showArrow && (
         <div className="fixed left-1/2 bottom-20 z-20 -translate-x-1/2 flex flex-col items-center justify-center pointer-events-none select-none transition-opacity duration-300">
           <svg width="100" height="100" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce-slow">
