@@ -4,8 +4,10 @@ import Image from "next/image";
 import StarsOverlay from "./StarsOverlay";
 import ProjectCard from "@/components/ProjectCard";
 import TestimonialCard from "@/components/TestimonialCard";
+import SkillCard from "@/components/SkillCard";
 import { projects } from "@/data/projects";
 import { testimonials } from "@/data/testimonials";
+import { skills } from "@/data/skills";
 import React, { useRef, useState, useEffect } from "react";
 
 export default function Home() {
@@ -174,7 +176,7 @@ export default function Home() {
         <div className="pointer-events-none select-none absolute inset-0 z-30" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.95) 100%)' }} />
         <StarsOverlay />
         <div className="hidden md:block absolute right-[-180px] bottom-0 z-5 h-full max-h-[1200px] w-auto pointer-events-none select-none">
-          <Image src="/greek-meader.svg" alt="Decoración griega" height={1200} width={1200} style={{ objectFit: 'contain', filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} className="h-full max-h-[1200px] w-auto opacity-8 animate-spin-slower" />
+          <Image src="/greek-meader.svg" alt="Decoración griega" height={1200} width={1200} style={{ objectFit: 'contain', filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} className="h-full max-h-[1200px] w-auto opacity-10 animate-spin-slower" />
         </div>
         <div className="z-10 flex flex-col items-center justify-center text-center w-full max-w-2xl mx-auto">
           <h1 className="text-6xl sm:text-7xl font-bold text-foreground mb-4">
@@ -216,9 +218,15 @@ export default function Home() {
             &ldquo;No me daré por vencido, ni aún vencido&rdquo;
           </blockquote>
         </div>
-        <div className="hidden md:block absolute right-0 bottom-0 z-0 h-full max-h-[1200px] w-auto pointer-events-none select-none">
+        <div className="hidden md:block absolute right-0 bottom-0 z-0 h-full max-h-[1200px] w-auto pointer-events-none select-none opacity-100">
           <Image src="/viking3.png" alt="Imagen de ejemplo" height={1200} width={1200} style={{ objectFit: 'contain' }} className="h-full max-h-[1200px] w-auto" />
         </div>
+        <div 
+          className="absolute bottom-0 left-0 w-full h-50 pointer-events-none z-200"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))'
+          }}
+        />
       </section>
       <section
         id="sobremi"
@@ -229,7 +237,8 @@ export default function Home() {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
       >
-        <div className="flex flex-row w-[220vw] h-full snap-x snap-mandatory scroll-smooth">
+        <h2 className="text-3xl sm:text-4xl font-bold font-[Cinzel] text-center">– Mi historia -</h2>
+        <div className="flex flex-row w-[220vw] h-96 snap-x snap-mandatory scroll-smooth">
           {/* 1. El Inicio */}
           <div className="flex flex-col md:flex-row items-center justify-center w-screen min-h-[80vh] px-2 snap-center transition-transform duration-500">
             {/* Fénix a la izquierda */}
@@ -241,7 +250,7 @@ export default function Home() {
             {/* Texto a la derecha */}
             <div className="flex flex-col items-center text-center justify-center ml-0">
               <Image src="/inicio.svg" alt="Inicio" width={64} height={64} className="mx-auto mb-4 opacity-20" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} />
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 font-[Cinzel]">– 1. El Origen</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 font-[Cinzel]">– 1. El Origen</h2>
               <div className="max-w-2xl text-white/90 text-lg font-[Tinos]">
                 <p>
                   Desde joven, mi mente funcionaba en patrones: observaba, descomponía, analizaba. Creaba mis propios algoritmos para entender el mundo. Cada problema era un sistema por desarmar, cada decisión una lógica interna por estudiar. Mientras otros simplemente aceptaban las cosas como eran, yo necesitaba saber por qué, cómo, para qué.
@@ -261,7 +270,7 @@ export default function Home() {
           {/* 2. La Batalla */}
           <div className="flex flex-col items-center justify-center w-screen min-h-[80vh] px-2 snap-center transition-transform duration-500">
             <Image src="/batalla.svg" alt="Batalla" width={64} height={64} className="mx-auto mb-4 opacity-20" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} />
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 font-[Cinzel]">– 2. La batalla eterna</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 font-[Cinzel]">– 2. La batalla eterna</h2>
             <div className="max-w-2xl text-white/90 text-lg font-[Tinos] text-center">
               <p>
                 Todos mis atributos —mi lógica, mi curiosidad, mi capacidad de análisis— fueron puestos a prueba en el campo menos predecible de todos: el cuerpo.
@@ -281,7 +290,7 @@ export default function Home() {
             {/* Texto a la izquierda */}
             <div className="flex flex-col items-center text-center justify-center">
               <Image src="/res.svg" alt="Resurgir" width={64} height={64} className="mx-auto mb-4 md:mx-0 opacity-20" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} />
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 font-[Cinzel]">– 3. Renacer</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 font-[Cinzel]">– 3. Renacer</h2>
               <div className="max-w-2xl text-white/90 text-lg font-[Tinos]">
                 <p>
                   Cuando la tormenta se disipó, no volví a ser el mismo. La batalla terminó, sí… pero dejó cicatrices que ya no duelen: enseñan.
@@ -308,98 +317,41 @@ export default function Home() {
       </section>
       {/* Sección Equipamiento del Guerrero */}
       <section id="equipamiento" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
+        {/* Libros */}
+        <div className="hidden lg:block absolute right-0 bottom-0 z-0 pointer-events-none select-none">
+          <Image 
+            src="/book3.png" 
+            alt="Decoración libro" 
+            width={500} 
+            height={500}
+            className="w-auto h-auto max-w-[900px] max-h-[900px] opacity-75"
+            style={{ objectFit: 'contain' }}
+          />
+        </div>
         <h2 className="text-3xl sm:text-4xl font-bold mb-8 font-[Cinzel]">– Conocimientos adquiridos -</h2>
         <div className="max-w-2xl text-center text-lg font-[Tinos] mb-8">
           <p>
             A lo largo de mi travesía, he forjado un arsenal de herramientas y tecnologías que potencian mi labor como desarrollador.
           </p>
         </div>
-        <div className="flex flex-wrap gap-8 justify-center items-start w-full max-w-6xl">
-          {/* Java */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">Java</span>
-            <span className="text-white/80 text-sm mt-2 text-center">POO y aplicaciones robustas</span>
-          </div>
-          {/* JavaScript */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">JavaScript</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Lógica y dinamismo web</span>
-          </div>
-          {/* TypeScript */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">TypeScript</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Tipado y robustez</span>
-          </div>
-          {/* HTML */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">HTML</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Estructura web semántica</span>
-          </div>
-          {/* CSS */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">CSS</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Estilos y animaciones</span>
-          </div>
-          {/* PHP */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">PHP</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Desarrollo web backend</span>
-          </div>
-          {/* Frameworks */}
-          {/* Spring Boot */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">Spring Boot</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Framework Java para APIs</span>
-          </div>
-          {/* React */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">React</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Interfaces interactivas</span>
-          </div>
-          {/* Next.js */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">Next.js</span>
-            <span className="text-white/80 text-sm mt-2 text-center">SSR y aplicaciones modernas</span>
-          </div>
-          {/* Node.js */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">Node.js</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Backend eficiente</span>
-          </div>
-          {/* Bases de datos */}
-          {/* MySQL */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">MySQL</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Bases de datos relacionales</span>
-          </div>
-          {/* PostgreSQL */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">PostgreSQL</span>
-            <span className="text-white/80 text-sm mt-2 text-center">DB avanzada y consultas SQL</span>
-          </div>
-          {/* Herramientas */}
-          {/* Git */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">Git</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Control de versiones</span>
-          </div>
-          {/* GitHub */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">GitHub</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Repositorios y colaboración</span>
-          </div>
-          {/* APIs */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">APIs</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Integración y comunicación</span>
-          </div>
-          {/* REST */}
-          <div className="bg-gradient-to-br from-white/10 to-black/80 border-2 border-red-400/60 rounded-2xl shadow-lg p-6 w-56 flex flex-col items-center">
-            <span className="text-red-400 font-bold text-lg font-[Cinzel] mb-1">REST</span>
-            <span className="text-white/80 text-sm mt-2 text-center">Servicios y endpoints</span>
-          </div>
+        <div className="flex flex-wrap gap-8 justify-center items-start w-full max-w-6xl z-20">
+          {skills.map((skill) => (
+            <SkillCard key={skill.id} skill={skill} />
+          ))}
         </div>
       </section>
+      
+      {/* Background Image Section 
+      <div className="relative w-full h-80 overflow-hidden">
+        <Image 
+          src="/ww.png" 
+          alt="Background" 
+          fill
+          className="object-contain opacity-80"
+          style={{ objectPosition: 'center' }}
+        />
+      </div>  */}
+    
       {/* Sección Proyectos */}
       <section id="conquistas" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         <h2 className="text-3xl sm:text-4xl font-bold mb-8 font-[Cinzel]">– Mis conquistas -</h2>
@@ -462,7 +414,7 @@ export default function Home() {
       </section>
       {/* Flecha animada */}
       {showArrow && (
-        <div className="fixed left-1/2 bottom-20 z-20 -translate-x-1/2 flex flex-col items-center justify-center pointer-events-none select-none transition-opacity duration-300">
+        <div className="fixed left-1/2 bottom-20 z-20 -translate-x-1/2 flex flex-col items-center justify-center pointer-events-none select-none transition-opacity duration-300 z-9999">
           <svg width="100" height="100" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce-slow">
             <path d="M36 60l-15-15M36 60l15-15" stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
