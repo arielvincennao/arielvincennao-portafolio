@@ -207,7 +207,7 @@ export default function Home() {
                 <Image src="/telegram.svg" alt="Telegram" width={32} height={32} className="hover:scale-110 transition-transform" />
               </a> */}
               {/* Gmail */}
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vincennaoa@gmail.com" aria-label="Gmail">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vincennaoa@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Gmail">
                 <Image src="/gmail.svg" alt="Gmail" width={32} height={32} className="hover:scale-110 transition-transform" />
               </a>
             </div>
@@ -454,7 +454,7 @@ export default function Home() {
                 <Image src="/telegram.svg" alt="Telegram" width={32} height={32} className="hover:scale-110 transition-transform" />
               </a> */}
             {/* Gmail */}
-            <a  href="https://mail.google.com/mail/?view=cm&fs=1&to=vincennaoa@gmail.com" aria-label="Gmail">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vincennaoa@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Gmail">
               <Image src="/gmail.svg" alt="Gmail" width={32} height={32} className="hover:scale-110 transition-transform" />
             </a>
           </div>
