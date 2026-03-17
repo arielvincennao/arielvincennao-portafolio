@@ -3,10 +3,8 @@
 import Image from "next/image";
 import StarsOverlay from "./StarsOverlay";
 import ProjectCard from "@/components/ProjectCard";
-import TestimonialCard from "@/components/TestimonialCard";
 import SkillCard from "@/components/SkillCard";
 import { projects } from "@/data/projects";
-import { testimonials } from "@/data/testimonials";
 import { skills } from "@/data/skills";
 import React, { useRef, useState, useEffect } from "react";
 
@@ -22,6 +20,12 @@ export default function Home() {
 
   // Mobile menu state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
@@ -69,7 +73,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen justify-center items-center bg-black relative overflow-hidden">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 border-b border-white/30 backdrop-blur-md py-5 px-4 md:px-8 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 w-full z-[9999] bg-black/80 border-b border-white/30 backdrop-blur-md py-5 px-4 md:px-8 flex items-center justify-between">
         {/* Hamburger menu button for mobile */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -85,15 +89,70 @@ export default function Home() {
         <div className="hidden md:flex gap-2 items-center" style={{ width: '120px' }}></div>
 
         <ul className="hidden md:flex gap-4 text-white text-lg font-[Cinzel] items-center">
-          <li className="flex items-center"><a href="#inicio" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Inicio"><span>Inicio</span></span></a></li>
+          <li className="flex items-center">
+            <a
+              href="#inicio"
+              className="navbar-link transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("inicio");
+              }}
+            >
+              <span className="navbar-link-inner" data-text="Inicio"><span>Inicio</span></span>
+            </a>
+          </li>
           <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
-          <li className="flex items-center"><a href="#sobremi" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Sobre mí"><span>Sobre mí</span></span></a></li>
+          <li className="flex items-center">
+            <a
+              href="#sobremi"
+              className="navbar-link transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("sobremi");
+              }}
+            >
+              <span className="navbar-link-inner" data-text="Sobre mí"><span>Sobre mí</span></span>
+            </a>
+          </li>
           <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
-          <li className="flex items-center"><a href="#tecnologias" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Tecnologías"><span>Tecnologías</span></span></a></li>
+          <li className="flex items-center">
+            <a
+              href="#tecnologias"
+              className="navbar-link transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("tecnologias");
+              }}
+            >
+              <span className="navbar-link-inner" data-text="Tecnologías"><span>Tecnologías</span></span>
+            </a>
+          </li>
           <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
-          <li className="flex items-center"><a href="#proyectos" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Proyectos"><span>Proyectos</span></span></a></li>
+          <li className="flex items-center">
+            <a
+              href="#proyectos"
+              className="navbar-link transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("proyectos");
+              }}
+            >
+              <span className="navbar-link-inner" data-text="Proyectos"><span>Proyectos</span></span>
+            </a>
+          </li>
           <li aria-hidden="true" className="flex items-center justify-center self-center"><Image src="/separator.svg" alt="Separador" width={18} height={24} className="w-auto h-5 align-middle" /></li>
-          <li className="flex items-center"><a href="#opiniones" className="navbar-link transition-colors"><span className="navbar-link-inner" data-text="Opiniones"><span>Opiniones</span></span></a></li>
+          <li className="flex items-center">
+            <a
+              href="#llamado"
+              className="navbar-link transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("llamado");
+              }}
+            >
+              <span className="navbar-link-inner" data-text="Contactame"><span>Contactame</span></span>
+            </a>
+          </li>
         </ul>
 
         <div className="hidden md:flex gap-2 items-center">
@@ -129,37 +188,57 @@ export default function Home() {
               <a
                 href="#inicio"
                 className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("inicio");
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 Inicio
               </a>
               <a
                 href="#sobremi"
                 className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("sobremi");
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 Sobre mí
               </a>
               <a
                 href="#tecnologias"
                 className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("tecnologias");
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 Tecnologias
               </a>
               <a
                 href="#proyectos"
                 className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("proyectos");
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 Proyectos
               </a>
               <a
-                href="#opiniones"
+                href="#llamado"
                 className="text-white text-xl font-[Cinzel] hover:text-white/80 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("llamado");
+                  setIsMobileMenuOpen(false);
+                }}
               >
-                Opiniones
+                Contactame
               </a>
             </nav>
 
@@ -172,7 +251,7 @@ export default function Home() {
         </div>
       )}
       {/* Hero Section */}
-      <section className="relative flex-1 flex items-center justify-center w-full min-h-screen py-24">
+      <section id="inicio" className="relative flex-1 flex items-center justify-center w-full min-h-screen py-24">
         <div className="pointer-events-none select-none absolute inset-0 z-30" style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.95) 100%)' }} />
         <StarsOverlay />
         <div className="hidden md:block absolute right-[-180px] bottom-0 z-5 h-full max-h-[1200px] w-auto pointer-events-none select-none">
@@ -237,10 +316,10 @@ export default function Home() {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
       >
-        <h2 className="text-3xl sm:text-4xl font-bold font-[Cinzel] text-center">– Mi historia -</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold font-[Cinzel] text-center mt-24">– Mi historia -</h2>
         <div className="flex flex-row w-[220vw] h-96 snap-x snap-mandatory scroll-smooth">
           {/* 1. El Inicio */}
-          <div className="flex flex-col md:flex-row items-center justify-center w-screen min-h-[80vh] px-2 snap-center transition-transform duration-500">
+          <div className="flex flex-col md:flex-row items-center justify-center w-screen min-h-[70vh] px-2 snap-center transition-transform duration-500">
             {/* Fénix a la izquierda */}
             <div className="flex items-center justify-start mb-1 md:mb-0">
               <div className="h-[320px] w-[320px] xl:h-[460px] xl:w-[460px] pointer-events-none select-none">
@@ -268,7 +347,7 @@ export default function Home() {
 
           </div>
           {/* 2. La Batalla */}
-          <div className="flex flex-col items-center justify-center w-screen min-h-[80vh] px-2 snap-center transition-transform duration-500">
+          <div className="flex flex-col items-center justify-center w-screen min-h-[70vh] px-2 snap-center transition-transform duration-500">
             <Image src="/batalla.svg" alt="Batalla" width={64} height={64} className="mx-auto mb-4 opacity-20" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} />
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 font-[Cinzel]">– 2. La batalla eterna</h2>
             <div className="max-w-2xl text-white/90 text-lg font-[Tinos] text-center">
@@ -286,7 +365,7 @@ export default function Home() {
             <div className="w-full max-w-4xl h-px bg-white/20 mt-12"></div>
           </div>
           {/* 3. El Resurgir */}
-          <div className="flex flex-col md:flex-row items-center justify-center w-screen min-h-[80vh] px-2 snap-center transition-transform duration-500">
+          <div className="flex flex-col md:flex-row items-center justify-center w-screen min-h-[70vh] px-2 snap-center transition-transform duration-500">
             {/* Texto a la izquierda */}
             <div className="flex flex-col items-center text-center justify-center">
               <Image src="/res.svg" alt="Resurgir" width={64} height={64} className="mx-auto mb-4 md:mx-0 opacity-20" style={{ filter: 'brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(119%)' }} />
@@ -316,7 +395,7 @@ export default function Home() {
         </div>
       </section>
       {/* Sección Equipamiento del Guerrero */}
-      <section id="equipamiento" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
+      <section id="tecnologias" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         {/* Libros */}
         <div className="hidden lg:block absolute right-0 bottom-0 z-0 pointer-events-none select-none">
           <Image 
@@ -353,7 +432,7 @@ export default function Home() {
       </div>  */}
     
       {/* Sección Proyectos */}
-      <section id="conquistas" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
+      <section id="proyectos" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         <h2 className="text-3xl sm:text-4xl font-bold mb-8 font-[Cinzel]">– Mis conquistas -</h2>
         <div className="max-w-4xl w-full px-4">
           <div className="grid gap-6">
@@ -363,8 +442,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Sección Testimonios */}
-      <section id="testimonios" className="relative flex flex-col items-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
+      {/* Sección Opiniones
+      <section id="opiniones" className="relative flex flex-col items-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         <h2 className="text-3xl sm:text-4xl font-bold mb-16 font-[Cinzel] text-center">– Palabras de quienes han luchado a mi lado –</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl w-full px-4">
@@ -373,6 +452,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      */}
       {/* Sección Llamado a nuevas campañas */}
       <section id="llamado" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         <h2 className="text-3xl sm:text-4xl font-bold mb-8 font-[Cinzel]">– Llamado a nuevas campañas –</h2>

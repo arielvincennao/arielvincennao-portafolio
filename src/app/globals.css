@@ -41,6 +41,19 @@ body {
   /* font-family: Arial, Helvetica, sans-serif; */
 }
 
+html {
+  --navbar-height: 0px;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--navbar-height);
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
 @keyframes bounce-slow {
   0%, 100% {
     transform: translateY(0);
