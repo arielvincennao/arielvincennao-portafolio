@@ -149,7 +149,7 @@ export default function Home() {
                 scrollToSection("llamado");
               }}
             >
-              <span className="navbar-link-inner" data-text="Contactame"><span>Contáctame</span></span>
+              <span className="navbar-link-inner" data-text="Contáctame"><span>Contáctame</span></span>
             </a>
           </li>
         </ul>
