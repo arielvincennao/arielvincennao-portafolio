@@ -9,7 +9,6 @@ import { skills } from "@/data/skills";
 import React, { useRef, useState, useEffect } from "react";
 
 export default function Home() {
-  // Drag-to-scroll para sección sobre mí
   const aboutMeScrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
@@ -150,7 +149,7 @@ export default function Home() {
                 scrollToSection("llamado");
               }}
             >
-              <span className="navbar-link-inner" data-text="Contactame"><span>Contactame</span></span>
+              <span className="navbar-link-inner" data-text="Contactame"><span>Contáctame</span></span>
             </a>
           </li>
         </ul>
@@ -453,7 +452,6 @@ export default function Home() {
         </div>
       </section>
       */}
-      {/* Sección Llamado a nuevas campañas */}
       <section id="llamado" className="relative flex flex-col items-center justify-center w-full min-h-screen py-24 px-4 bg-black z-10 border-t border-white/10">
         <h2 className="text-3xl sm:text-4xl font-bold mb-8 font-[Cinzel]">– Llamado a nuevas campañas –</h2>
         <div className="max-w-2xl text-center text-lg font-[Tinos]">
@@ -492,7 +490,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Flecha animada */}
       {showArrow && (
         <div className="fixed left-1/2 bottom-20 z-20 -translate-x-1/2 flex flex-col items-center justify-center pointer-events-none select-none transition-opacity duration-300 z-9999">
           <svg width="100" height="100" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="animate-bounce-slow">
